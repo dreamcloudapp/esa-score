@@ -16,14 +16,6 @@ public class BM25Calculator implements TfIdfStrategy {
         this.delta = delta;
     }
 
-    public BM25Calculator(TfIdfStrategy tfIdfStrategy, double k, double b) {
-        this(tfIdfStrategy, k, b, 0.5);
-    }
-
-    public BM25Calculator(TfIdfStrategy tfIdfStrategy) {
-        this(tfIdfStrategy, 1.2, 0.5);
-    }
-
     public double tf(double tf, TermInfo termInfo) {
         double tfScore = this.tfIdfStrategy.tf(tf, termInfo);
         return ((tfScore * (k + 1)) / (tfScore + (k * (1 - b + (b * (termInfo.dl / termInfo.avgDl)))))) + delta;
