@@ -18,6 +18,8 @@ public class TfIdfOptions {
     public static TfIdfOptions fromString(String mode) {
         switch(mode) {
             //Handle special options
+            case "bm25":
+                return createBm25();
             case "bm25+":
                 return createBm25Plus();
             case "bm11":
