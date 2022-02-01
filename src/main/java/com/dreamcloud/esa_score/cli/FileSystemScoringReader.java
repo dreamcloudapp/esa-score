@@ -50,13 +50,14 @@ public class FileSystemScoringReader {
         options.addOption(option);
     }
 
-    public void parseOptions(CommandLine cli) {
+    public void parseOptions(CommandLine cli) throws IOException {
         this.termIndexFile = new File(cli.getOptionValue(TERM_INDEX_FILE, "term-index.dc"));
         this.documentScoreFile = new File(cli.getOptionValue(DOCUMENT_SCORE_FILE, "document-scores.dc"));
         this.scoreMechanism = cli.getOptionValue(SCORE_MECHANISM, "disk");
         this.scoreCache = cli.getOptionValue(SCORE_CACHE, "");
         if (cli.hasOption(ID_TITLES_FILE)) {
             this.idTitlesFile = new File(cli.getOptionValue(ID_TITLES_FILE));
+            DocumentNameResolver.loadFile(idTitlesFile);
         }
     }
 
@@ -67,10 +68,6 @@ public class FileSystemScoringReader {
             termIndex = reader.readIndex();
         }
         return termIndex;
-    }
-
-    public DocumentNameResolver getDocumentNameResolver() throws IOException {
-        return new DocumentNameResolver(this.idTitlesFile);
     }
 
     public CollectionInfo getCollectionInfo() throws IOException {

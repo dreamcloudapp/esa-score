@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DocumentNameResolver {
-    private final Map<Integer, String> titleMap = new ConcurrentHashMap<>();
+    private static final Map<Integer, String> titleMap = new ConcurrentHashMap<>();
 
-    public DocumentNameResolver(File inputFile) throws IOException {
+    public static void loadFile(File inputFile) throws IOException {
         FileReader fileReader = new FileReader(inputFile);
         BufferedReader reader = new BufferedReader(fileReader);
        reader.lines().forEach((String s) -> {
@@ -23,7 +23,7 @@ public class DocumentNameResolver {
        });
     }
 
-    public String getTitle(int id) {
-        return titleMap.get(id);
+    public static String getTitle(int id) {
+        return titleMap.getOrDefault(id, String.valueOf(id));
     }
 }
