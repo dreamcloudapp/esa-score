@@ -1,7 +1,8 @@
-package com.dreamcloud.esa_score.fs;
+package com.dreamcloud.esa_score.score;
 
-import com.dreamcloud.esa_score.score.DocumentScoreReader;
-import com.dreamcloud.esa_score.score.TfIdfScore;
+import com.dreamcloud.esa_score.fs.DocumentScoreDataReader;
+import com.dreamcloud.esa_score.fs.TermIndex;
+import com.dreamcloud.esa_score.fs.TermIndexEntry;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -32,6 +33,7 @@ public class ScoreReader implements DocumentScoreReader {
             for (int scoreIdx = 0; scoreIdx < entry.numScores; scoreIdx++) {
                 int doc = byteBuffer.getInt();
                 float score = byteBuffer.getFloat();
+                //todo: divide score by length numScores per: https://nlp.stanford.edu/IR-book/html/htmledition/computing-vector-scores-1.html
                 outVector.add(new TfIdfScore(doc, term, score));
             }
         }

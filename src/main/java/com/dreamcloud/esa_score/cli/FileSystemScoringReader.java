@@ -5,6 +5,7 @@ import com.dreamcloud.esa_score.fs.*;
 import com.dreamcloud.esa_score.score.DocumentNameResolver;
 import com.dreamcloud.esa_score.score.DocumentScoreCachingReader;
 import com.dreamcloud.esa_score.score.DocumentScoreReader;
+import com.dreamcloud.esa_score.score.ScoreReader;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
