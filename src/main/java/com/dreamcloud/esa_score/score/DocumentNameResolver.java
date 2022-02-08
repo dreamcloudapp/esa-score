@@ -1,8 +1,6 @@
 package com.dreamcloud.esa_score.score;
 
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,19 +9,17 @@ public class DocumentNameResolver {
     private static final Map<String, Integer> idMap = new ConcurrentHashMap<>();
 
     public static void loadFile(File inputFile) throws IOException {
-        FileReader fileReader = new FileReader(inputFile);
-        BufferedReader reader = new BufferedReader(fileReader);
-        String line = reader.readLine();
-        while (line != null) {
-            ByteBuffer byteBuffer = ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8));
-            int id = byteBuffer.getInt();
-            StringBuilder title = new StringBuilder();
-            while (byteBuffer.remaining() > 0) {
-                title.append(byteBuffer.get());
+        DataInputStream inputStream = new DataInputStream(new FileInputStream(inputFile));
+        try {
+            while (true) {
+                int articleId = inputStream.readInt();
+                int titleLength = inputStream.readInt();
+                String title = new String(inputStream.readNBytes(titleLength));
+                titleMap.put(articleId, title);
+                idMap.put(title, articleId);
             }
-            titleMap.put(id, title.toString());
-            idMap.put(title.toString(), id);
-            line = reader.readLine();;
+        } catch (EOFException e) {
+            //expected
         }
     }
 
