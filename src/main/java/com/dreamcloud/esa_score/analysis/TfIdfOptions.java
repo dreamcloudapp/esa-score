@@ -33,14 +33,14 @@ public class TfIdfOptions {
     }
 
     public static TfIdfOptions createTfIdf(char tfOption, char idfOption, char normalizationOption) {
-        return new TfIdfOptions(new StringBuilder().append(tfOption).append(idfOption).append(normalizationOption).toString());
+        return new TfIdfOptions(String.valueOf(tfOption) + idfOption + normalizationOption);
     }
 
     public static TfIdfOptions createBm25(float b, float k, float delta) {
         TfIdfOptions options = new TfIdfOptions("b:nbn");
         options.setBm25_b(b);
-        options.setBm25_b(k);
-        options.setBm25_b(delta);
+        options.setBm25_k(k);
+        options.setBm25_delta(delta);
         return options;
     }
 
@@ -94,5 +94,13 @@ public class TfIdfOptions {
 
     public void setBm25_delta(float bm25_delta) {
         this.bm25_delta = bm25_delta;
+    }
+
+    public void debug() {
+        System.out.println("mode: " + mode);
+        System.out.println("bm25: " + isBm25);
+        System.out.println("bm25_b: " + bm25_b);
+        System.out.println("bm25_k: " + bm25_k);
+        System.out.println("bm25_delta: " + bm25_delta);
     }
 }

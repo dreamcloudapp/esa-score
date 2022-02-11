@@ -10,6 +10,7 @@ public class DocumentNameResolver {
 
     public static void loadFile(File inputFile) throws IOException {
         DataInputStream inputStream = new DataInputStream(new FileInputStream(inputFile));
+        int articleCounter = 0;
         try {
             while (true) {
                 int articleId = inputStream.readInt();
@@ -17,6 +18,10 @@ public class DocumentNameResolver {
                 String title = new String(inputStream.readNBytes(titleLength));
                 titleMap.put(articleId, title);
                 idMap.put(title, articleId);
+
+                if (articleCounter++ % 1000 == 0) {
+                   System.out.println(articleId + " -> " + title);
+                }
             }
         } catch (EOFException e) {
             //expected

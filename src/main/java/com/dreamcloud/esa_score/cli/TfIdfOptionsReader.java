@@ -39,13 +39,14 @@ public class TfIdfOptionsReader {
         }
 
         if (cli.hasOption(BM25_K)) {
-            options.setBm25_b(Float.parseFloat(cli.getOptionValue(BM25_K)));
+            options.setBm25_k(Float.parseFloat(cli.getOptionValue(BM25_K)));
         }
 
         if (cli.hasOption(BM25_DELTA)) {
-            options.setBm25_b(Float.parseFloat(cli.getOptionValue(BM25_DELTA)));
+            options.setBm25_delta(Float.parseFloat(cli.getOptionValue(BM25_DELTA)));
         }
 
+        options.debug();
         return options;
     }
 }
