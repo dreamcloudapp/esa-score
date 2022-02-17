@@ -12,7 +12,8 @@ public class DocumentScoreMemoryReader implements DocumentScoreDataReader {
         scoreData = inputStream.readAllBytes();
     }
 
-    public ByteBuffer readScores(int offset, int numScores) throws IOException {
-        return ByteBuffer.wrap(scoreData, offset, numScores * FileSystem.DOCUMENT_SCORE_BYTES);
+    //todo: cleanup for segmentation
+    public ByteBuffer readScores(long offset, int numScores) throws IOException {
+        return ByteBuffer.wrap(scoreData, (int) offset, numScores * FileSystem.DOCUMENT_SCORE_BYTES);
     }
 }

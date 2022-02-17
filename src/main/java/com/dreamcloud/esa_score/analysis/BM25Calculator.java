@@ -18,7 +18,7 @@ public class BM25Calculator implements TfIdfStrategy {
 
     public double tf(double tf, TermInfo termInfo) {
         double tfScore = this.tfIdfStrategy.tf(tf, termInfo);
-        return ((tfScore * (k + 1)) / (tfScore + (k * (1 - b + (b * (termInfo.dl / termInfo.avgDl)))))) + delta;
+        return Math.log(1 + ((tfScore * (k + 1)) / (Math.log(tfScore) + 1 + (k * (1 - b + (b * (termInfo.dl / termInfo.avgDl)))))) + delta);
     }
 
     public double idf(int totalDocs, int termDocs) {

@@ -46,7 +46,7 @@ public class TfIdfOptionsReader {
             options.setBm25_delta(Float.parseFloat(cli.getOptionValue(BM25_DELTA)));
         }
 
-        options.debug();
+        options.display();
         return options;
     }
 }

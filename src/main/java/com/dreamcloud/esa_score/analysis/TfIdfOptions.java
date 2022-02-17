@@ -3,9 +3,9 @@ package com.dreamcloud.esa_score.analysis;
 public class TfIdfOptions {
     protected String mode;
     protected boolean isBm25 = false;
-    protected float bm25_b;
-    protected float bm25_k;
-    protected float bm25_delta;
+    protected float bm25_b = 0.5f;
+    protected float bm25_k = 1.2f;
+    protected float bm25_delta = 0.0f;
 
     public TfIdfOptions(String charMode) {
         this.setMode(charMode);
@@ -96,11 +96,11 @@ public class TfIdfOptions {
         this.bm25_delta = bm25_delta;
     }
 
-    public void debug() {
+    public void display() {
         System.out.println("mode: " + mode);
-        System.out.println("bm25: " + isBm25);
-        System.out.println("bm25_b: " + bm25_b);
-        System.out.println("bm25_k: " + bm25_k);
-        System.out.println("bm25_delta: " + bm25_delta);
+        System.out.println("isBM25: " + isBm25);
+        System.out.println("b: " + bm25_b);
+        System.out.println("d: " + bm25_delta);
+        System.out.println("k: " + bm25_k);
     }
 }

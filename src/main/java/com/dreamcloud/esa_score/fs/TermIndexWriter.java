@@ -5,7 +5,7 @@ import java.io.*;
 public class TermIndexWriter {
     private final double averageDocumentLength;
     DataOutputStream outputStream;
-    int offset = 0;
+    long offset = 0;
     int documentCount;
 
     public TermIndexWriter(int documentCount, double averageDocumentLength) {
@@ -24,13 +24,13 @@ public class TermIndexWriter {
 
     public void writeTerm(String term, int numScores) throws IOException {
         int termLength = term.getBytes().length;
-        int termOffset = offset;
-        offset += numScores * FileSystem.DOCUMENT_SCORE_BYTES;
+        long termOffset = offset;
+        offset += (long) numScores * FileSystem.DOCUMENT_SCORE_BYTES;
 
         outputStream.writeInt(termLength);
         outputStream.write(term.getBytes());
         outputStream.writeInt(numScores);
-        outputStream.writeInt(termOffset);
+        outputStream.writeLong(termOffset);
         outputStream.writeInt(numScores);
     }
 

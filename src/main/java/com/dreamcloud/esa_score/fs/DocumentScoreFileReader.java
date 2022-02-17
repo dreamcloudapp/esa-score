@@ -15,7 +15,7 @@ public class DocumentScoreFileReader implements DocumentScoreDataReader {
         scoreFileReader = new FileInputStream(scoreFile);
     }
 
-    public ByteBuffer readScores(int offset, int numScores) throws IOException {
+    public ByteBuffer readScores(long offset, int numScores) throws IOException {
         scoreFileReader.getChannel().position(offset);
         //byte[] scores = new byte[numScores * FileSystem.DOCUMENT_SCORE_BYTES];
         byte[] scores = scoreFileReader.readNBytes(numScores * FileSystem.DOCUMENT_SCORE_BYTES);

@@ -24,7 +24,7 @@ public class TermIndexReader {
             int termLength = inputStream.readInt();
             entry.term = new String(inputStream.readNBytes(termLength));
             entry.documentFrequency = inputStream.readInt();
-            entry.offset = inputStream.readInt();
+            entry.offset = inputStream.readLong();
             entry.numScores = inputStream.readInt();
             return entry;
         } catch (EOFException e) {

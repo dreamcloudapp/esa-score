@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public interface DocumentScoreDataReader {
-    ByteBuffer readScores(int offset, int numScores) throws IOException;
+    ByteBuffer readScores(long offset, int numScores) throws IOException;
 }
