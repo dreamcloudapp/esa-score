@@ -19,6 +19,10 @@ public class TfIdfScore {
         return score;
     }
 
+    public void setScore(double score) {
+        this.score = score;
+    }
+
     public Integer getDocument() {
         return document;
     }
